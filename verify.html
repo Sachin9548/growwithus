@@ -68,73 +68,74 @@
       </section>
     </div>
 
-    <script>
-      // Sample data array of certificates
-      const certificates = [
-        {
-          id: "SMGWS104",
-          fullName: "Sangita Meshram",
-          email: "sangitameshram9309@gmail.com",
-          collegeName: "G. H. Raisoni College of Engineering, Nagpur",
-          startDate: "2025-06-10",
-          endDate: "2025-06-25",
-          workStatus: true,
-          paymentStatus: true,
-          treesPlanted: 15,
-        },
-        {
-          id: "green2",
-          fullName: "Bob Johnson",
-          email: "bob@example.com",
-          collegeName: "Forest College",
-          startDate: "2025-02-01",
-          endDate: "2025-02-05",
-          workStatus: true,
-          paymentStatus: false,
-          treesPlanted: 10,
-        },
-      ];
+   <script>
+  // Sample data array of certificates
+  const certificates = [
+    {
+      id: "SMGWS104",
+      fullName: "Sangita Meshram",
+      email: "sangitameshram9309@gmail.com",
+      collegeName: "G. H. Raisoni College of Engineering, Nagpur",
+      startDate: "2025-06-10",
+      endDate: "2025-06-25",
+      workStatus: true,
+      paymentStatus: true,
+      treesPlanted: 15,
+    },
+    {
+      id: "green2",
+      fullName: "Bob Johnson",
+      email: "bob@example.com",
+      collegeName: "Forest College",
+      startDate: "2025-02-01",
+      endDate: "2025-02-05",
+      workStatus: true,
+      paymentStatus: false,
+      treesPlanted: 10,
+    },
+  ];
 
-      document.getElementById("verifyButton").addEventListener("click", () => {
-        const code = document.getElementById("certificateCode").value.trim();
-        const resultDiv = document.getElementById("result");
-        const errorDiv = document.getElementById("error");
-        resultDiv.innerHTML = "";
-        errorDiv.textContent = "";
+  document.getElementById("verifyButton").addEventListener("click", () => {
+    const code = document.getElementById("certificateCode").value.trim();
+    const resultDiv = document.getElementById("result");
+    const errorDiv = document.getElementById("error");
+    resultDiv.innerHTML = "";
+    errorDiv.textContent = "";
 
-        if (!code) {
-          errorDiv.textContent = "Please enter a certificate code.";
-          return;
-        }
+    if (!code) {
+      errorDiv.textContent = "Please enter a certificate code.";
+      return;
+    }
 
-        const cert = certificates.find(
-          (c) => c.id.toLowerCase() === code.toLowerCase()
-        );
-        if (!cert) {
-          resultDiv.innerHTML = `
-          <div class="text-red-600">
-            <h3 class="text-xl font-semibold">Invalid Certificate Code</h3>
-            <p>Please check the certificate code and try again.</p>
-          </div>
-        `;
-          return;
-        }
-
-        // Determine verification status
-        const isValid = cert.workStatus && cert.paymentStatus;
-        resultDiv.innerHTML = `
-        <div class="${isValid ? "text-green-600" : "text-red-600"}">
-          <h3 class="text-xl font-semibold">\${isValid ? 'Certificate Verified!' : 'Certificate Not Verified'}</h3>
-          <p class="mt-2">Participant: \${cert.fullName}</p>
-          <p>College Name: \${cert.collegeName}</p>
-          <p>Email: \${cert.email}</p>
-          <p>Trees Planted: \${cert.treesPlanted}</p>
-          <p>Start Date: \${new Date(cert.startDate).toLocaleDateString()}</p>
-          <p>End Date: \${new Date(cert.endDate).toLocaleDateString()}</p>
-          <p><strong>Status:</strong> \${cert.paymentStatus ? 'Payment Successful' : 'Payment Pending'}</p>
+    const cert = certificates.find(
+      (c) => c.id.toLowerCase() === code.toLowerCase()
+    );
+    if (!cert) {
+      resultDiv.innerHTML = `
+        <div class="text-red-600">
+          <h3 class="text-xl font-semibold">Invalid Certificate Code</h3>
+          <p>Please check the certificate code and try again.</p>
         </div>
       `;
-      });
-    </script>
+      return;
+    }
+
+    // Determine verification status
+    const isValid = cert.workStatus && cert.paymentStatus;
+    resultDiv.innerHTML = `
+      <div class="${isValid ? 'text-green-600' : 'text-red-600'}">
+        <h3 class="text-xl font-semibold">${isValid ? 'Certificate Verified!' : 'Certificate Not Verified'}</h3>
+        <p class="mt-2">Participant: ${cert.fullName}</p>
+        <p>College Name: ${cert.collegeName}</p>
+        <p>Email: ${cert.email}</p>
+        <p>Trees Planted: ${cert.treesPlanted}</p>
+        <p>Start Date: ${new Date(cert.startDate).toLocaleDateString()}</p>
+        <p>End Date: ${new Date(cert.endDate).toLocaleDateString()}</p>
+        <p><strong>Status:</strong> ${cert.paymentStatus ? 'Payment Successful' : 'Payment Pending'}</p>
+      </div>
+    `;
+  });
+</script>
+
   </body>
 </html>
