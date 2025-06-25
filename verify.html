@@ -87,17 +87,6 @@
       paymentStatus: true,
       treesPlanted: 15,
     },
-    {
-      id: "green2",
-      fullName: "Bob Johnson",
-      email: "bob@example.com",
-      collegeName: "Forest College",
-      startDate: "2025-02-01",
-      endDate: "2025-02-05",
-      workStatus: true,
-      paymentStatus: false,
-      treesPlanted: 10,
-    },
   ];
 
   document.getElementById("verifyButton").addEventListener("click", () => {
@@ -133,7 +122,8 @@
         <p class="mt-2">Participant: ${cert.fullName}</p>
         <p>College Name: ${cert.collegeName}</p>
         <p>Email: ${cert.email}</p>
-        <p>Trees Planted: ${cert.treesPlanted}</p>
+        <p>Certificate Code: ${cert.id}</p>
+        <p>Certificate Type: Intership</p>
         <p>Start Date: ${new Date(cert.startDate).toLocaleDateString()}</p>
         <p>End Date: ${new Date(cert.endDate).toLocaleDateString()}</p>
       </div>
