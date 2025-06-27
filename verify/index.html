@@ -1,1 +1,136 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./images/l1.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grow With Us</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-white py-10 px-5 md:px-20">
+    <div class="container mx-auto">
+      <header class="flex justify-between items-center">
+        <div class="text-green-600 font-bold text-3xl">Grow With Us</div>
+      </header>
+
+      <section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="space-y-6">
+          <h1 class="text-3xl font-bold text-green-800">
+            Certificate Verification
+          </h1>
+          <p class="text-lg text-gray-600">
+            Verify the authenticity of certificates issued by Grow With Us
+          </p>
+
+          <div class="space-y-3">
+            <h2 class="font-semibold text-lg">How to Verify Certificates</h2>
+            <ul class="list-disc list-inside text-gray-600">
+              <li>Enter the Certificate Code found on your certificate</li>
+              <li>Click "Verify Certificate" to check authenticity</li>
+              <li>View the verification results with certificate details</li>
+            </ul>
+          </div>
+
+          <div class="space-y-3">
+            <h2 class="font-semibold text-lg">About Our Certificates</h2>
+            <p class="text-gray-600">
+              All certificates issued by Grow With Us contain a unique
+              Certificate Code that can be verified through this portal. This
+              ensures the authenticity of participation in our tree plantation
+              campaigns.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg space-y-6">
+          <h2 class="text-2xl font-bold text-green-800">Verify Certificate</h2>
+          <div>
+            <label for="certificateCode" class="block text-lg text-gray-700"
+              >Certificate Code</label
+            >
+            <input
+              type="text"
+              id="certificateCode"
+              class="w-full p-3 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+              placeholder="Enter Certificate Code"
+            />
+          </div>
+
+          <button
+            id="verifyButton"
+            class="w-full py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+          >
+            Verify Certificate
+          </button>
+
+          <div id="result" class="mt-6"></div>
+          <div id="error" class="text-red-600 text-sm mt-4"></div>
+        </div>
+      </section>
+    </div>
+
+   <script>
+  // Sample data array of certificates
+  const certificates = [
+    {
+      id: "SMGWS104",
+      fullName: "Sangita Meshram",
+      email: "sangitameshram9309@gmail.com",
+      collegeName: "G. H. Raisoni College of Engineering, Nagpur",
+      startDate: "2025-06-10",
+      endDate: "2025-06-25",
+      workStatus: true,
+      paymentStatus: true,
+      treesPlanted: 15,
+    },
+  ];
+
+  document.getElementById("verifyButton").addEventListener("click", () => {
+    const code = document.getElementById("certificateCode").value.trim();
+    const resultDiv = document.getElementById("result");
+    const errorDiv = document.getElementById("error");
+    resultDiv.innerHTML = "";
+    errorDiv.textContent = "";
+
+    if (!code) {
+      errorDiv.textContent = "Please enter a certificate code.";
+      return;
+    }
+
+    const cert = certificates.find(
+      (c) => c.id.toLowerCase() === code.toLowerCase()
+    );
+    if (!cert) {
+      resultDiv.innerHTML = `
+        <div class="text-red-600">
+          <h3 class="text-xl font-semibold">Invalid Certificate Code</h3>
+          <p>Please check the certificate code and try again.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Determine verification status
+    const isValid = cert.workStatus && cert.paymentStatus;
+    resultDiv.innerHTML = `
+      <div class="${isValid ? 'text-green-600' : 'text-red-600'}">
+        <h3 class="text-xl font-semibold">${isValid ? 'Certificate Verified!' : 'Certificate Not Verified'}</h3>
+        <p class="mt-2">Participant: ${cert.fullName}</p>
+        <p>College Name: ${cert.collegeName}</p>
+        <p>Email: ${cert.email}</p>
+        <p>Certificate Code: ${cert.id}</p>
+        <p>Certificate Type: Intership</p>
+        <p>Start Date: ${new Date(cert.startDate).toLocaleDateString()}</p>
+        <p>End Date: ${new Date(cert.endDate).toLocaleDateString()}</p>
+      </div>
+    `;
+  });
+</script>
+
+  </body>
+</html>
